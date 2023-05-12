@@ -1,0 +1,31 @@
+<section>
+    <h1>Test Pipe.</h1>
+    <div [innerhtml]="html"></div>
+</section>
+<br />
+
+<section>
+    <h1>Test Api Service</h1>
+    <div *ngIf="(info.showInfo$ | async); let info; else loading">
+        {{ info }}
+    </div>
+    <div *ngIf="(data.data$ | async); let data; else loading">
+        <p>{{ data.id }}</p>
+        <p>{{ data.title }}</p>
+    </div>
+    <ng-template #loading>Loading...</ng-template>
+</section>
+<br />
+
+<section>
+    <h1>Test Data Service</h1>
+    <form [formGroup]="searchform" (submit)="submit()">
+        <label for="first-name">Find Id: </label>
+        <input id="firstname" type="text" formControlName="id" required>
+        <div *ngIf="id?.errors?.['required']">
+            ID is required.
+        </div>
+        <button type="submit" [disabled]="!(isValid)">Submit</button>
+    </form>
+</section>
+<br />
